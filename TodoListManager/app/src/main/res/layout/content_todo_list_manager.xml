@@ -12,20 +12,11 @@
     tools:context="il.ac.huji.todolist.TodoListManagerActivity"
     tools:showIn="@layout/activity_todo_list_manager">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/edtNewItem"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/lstTodoItems"
-        android:layout_below="@+id/edtNewItem"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:longClickable="true" />
 </RelativeLayout>

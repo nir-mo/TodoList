@@ -1,5 +1,6 @@
 package il.ac.huji.todolist;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,17 +16,19 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class TodoListManagerActivity extends AppCompatActivity {
 
-    private ArrayList<String> todos;
-    private RedBlueAdapter adapter;
+    final int ACTIVITY_ADD_CODE = 1;
 
-    private void addItem() {
+    private ArrayList<TaskWithDate> todos;
+    private MissionDueAdapter adapter;
+
+    public void addItem(final TaskWithDate task) {
         // Add item to the list and update views...
-        EditText edtText = (EditText) findViewById(R.id.edtNewItem);
-        this.todos.add(edtText.getText().toString());
+        this.todos.add(task);
         adapter.notifyDataSetChanged();
     }
 
@@ -41,9 +44,10 @@ public class TodoListManagerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_todo_list_manager);
 
         todos = new ArrayList();
-        adapter = new RedBlueAdapter(this, todos);
+        adapter = new MissionDueAdapter(this, todos);
 
         ListView listView = (ListView) findViewById(R.id.lstTodoItems);
+        listView.setLongClickable(true);
         listView.setAdapter(adapter);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -62,10 +66,23 @@ public class TodoListManagerActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.menuItemAdd) {
-            this.addItem();
+            Intent add = new Intent(this, AddNewTodoItemActivity.class);
+            startActivityForResult(add, ACTIVITY_ADD_CODE);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == ACTIVITY_ADD_CODE) {
+            if (resultCode == RESULT_OK) {
+                Bundle results = data.getExtras();
+
+                addItem(new TaskWithDate(results.getString(getString(R.string.result_title)),
+                        (Date) results.get(getString(R.string.result_date))));
+            }
+        }
     }
 }

@@ -2,4 +2,9 @@
     <string name="app_name">TodoList</string>
     <string name="action_add">Add</string>
     <string name="delete_button">Delete Item</string>
+    <string name="result_title">title</string>
+    <string name="result_date">dueDate</string>
+    <string name="date_format">dd/MM/yyyy</string>
+    <string name="call_signature">"Call "</string>
+    <string name="tel_uri">"tel:"</string>
 </resources>
