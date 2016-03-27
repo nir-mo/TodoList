@@ -1,6 +1,8 @@
 package il.ac.huji.todolist;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -23,19 +25,24 @@ public class TodoListManagerActivity extends AppCompatActivity {
 
     final int ACTIVITY_ADD_CODE = 1;
 
-    private ArrayList<TaskWithDate> todos;
-    private MissionDueAdapter adapter;
+    private TodoCursorAdapter adapter;
+    private SQLiteDatabase db;
+    private TodoDBHelper todoDBHelper;
+
+    private void updateDB() {
+       adapter.changeCursor(todoDBHelper.selectAll(db));
+    }
 
     public void addItem(final TaskWithDate task) {
         // Add item to the list and update views...
-        this.todos.add(task);
-        adapter.notifyDataSetChanged();
+        TodoDBHelper.insert(db, task);
+        updateDB();
     }
 
     public void removeItem(final int position) {
         // Remove Item from the array and notify.
-        this.todos.remove(position);
-        adapter.notifyDataSetChanged();
+        TodoDBHelper.delete(db, position);
+        updateDB();
     }
 
     @Override
@@ -43,11 +50,12 @@ public class TodoListManagerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo_list_manager);
 
-        todos = new ArrayList();
-        adapter = new MissionDueAdapter(this, todos);
+        todoDBHelper = new TodoDBHelper(this);
+        db = todoDBHelper.getWritableDatabase();
 
         ListView listView = (ListView) findViewById(R.id.lstTodoItems);
         listView.setLongClickable(true);
+        adapter = new TodoCursorAdapter(this, todoDBHelper.selectAll(db), 0);
         listView.setAdapter(adapter);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

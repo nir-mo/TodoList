@@ -19,7 +19,6 @@ public class AddNewTodoItemActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO: set layout size & position
         setContentView(R.layout.activity_add_item);
 
         Button cancel = (Button) findViewById(R.id.btnCancel);
