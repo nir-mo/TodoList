@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Created by nimoshe on 3/24/2016.
@@ -56,7 +57,7 @@ public class TodoDBHelper extends SQLiteOpenHelper {
         return db.insert(TABLE_NAME, null, cv);
     }
 
-    static public int delete(SQLiteDatabase db, final int idToRemove) {
+    static public int delete(SQLiteDatabase db, final long idToRemove) {
         String args[] = { String.valueOf(idToRemove) };
         return db.delete(TABLE_NAME, ID_LIKE_SQL, args);
     }
