@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#0288D1</color>
+    <color name="colorPrimaryDark">#0277BD</color>
+    <color name="colorAccent">#40C4FF</color>
+
+    <color name="b50">#E1F5FE</color>
+    <color name="b100">#B3E5FC</color>
+    <color name="b200">#81D4FA</color>
+    <color name="b300">#4FC3F7</color>
+    <color name="b400">#29B6F6</color>
+    <color name="b500">#03A9F4</color>
+    <color name="b600">#039BE5</color>
+    <color name="b700">#0288D1</color>
+    <color name="b800">#0277BD</color>
+    <color name="b900">#01579B</color>
+    <color name="A100">#80D8FF</color>
+    <color name="A200">#40C4FF</color>
+    <color name="A400">#00B0FF</color>
+    <color name="A700">#0091EA</color>
+
+    <color name="lightGrey">#e3e5e6</color>
+    <color name="bitDarkGrey">#c7c8c9</color>
+
+</resources>
